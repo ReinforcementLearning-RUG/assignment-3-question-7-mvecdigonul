@@ -36,6 +36,8 @@ class TDEvaluator(AbstractEvaluator):
     def _update_value_function(self, policy: AbstractPolicy) -> None:
         """
         Runs a single episode using the TD(0) method to update the value function.
+        This is for a single episode.
+        
         :param policy: A policy object that provides action probabilities for each state.
         """
         

@@ -53,7 +53,8 @@ class MCEvaluator(AbstractEvaluator):
 
     def _update_value_function(self, episode: List[Tuple[int, int, float]]) -> None:
         """
-        Update the value function using the Monte Carlo method. A first visit algorithm is used.
+        Update the value function using the Monte Carlo method. 
+        A first visit algorithm is used.
 
         :param episode: A list of (state, action, reward) tuples.
         """
