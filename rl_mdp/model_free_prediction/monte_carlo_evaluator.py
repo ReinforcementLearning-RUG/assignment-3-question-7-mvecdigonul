@@ -53,8 +53,20 @@ class MCEvaluator(AbstractEvaluator):
 
     def _update_value_function(self, episode: List[Tuple[int, int, float]]) -> None:
         """
-        Update the value function using the Monte Carlo method.
+        Update the value function using the Monte Carlo method. A first visit algorithm is used.
 
         :param episode: A list of (state, action, reward) tuples.
         """
-        pass
+        
+        G: float = 0
+        visited_states: set = set()
+        reversed_episode: List[Tuple[int, int, float]] = episode[::-1]
+        
+        for state, action, reward in reversed_episode:
+            # G =  r + λG - gamma is definied in the mdp in main.py
+            G = self.env.discount_factor * G + reward
+            
+            if state not in visited_states:
+                visited_states.add(state)
+                self.returns[state].append(G)
+                self.value_fun[state] = np.mean(self.returns[state])
